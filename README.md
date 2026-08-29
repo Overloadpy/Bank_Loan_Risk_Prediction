@@ -14,7 +14,7 @@ An end-to-end Machine Learning credit scoring pipeline and risk evaluation suite
 
 - **Author**: **Yordanos Andargachew**
 - **Phone**: `+251 952 190 305`
-- **Location**: `/home/igi/Desktop/ab-d/dev/Bank_Loan_Risk_Prediction/`
+- **GitHub Repository**: [Overloadpy/Bank_Loan_Risk_Prediction](https://github.com/Overloadpy/Bank_Loan_Risk_Prediction)
 
 ---
 
@@ -96,8 +96,9 @@ flowchart TD
 ### 1. Installation & Environment Setup
 
 ```bash
-# Clone or navigate to the repository
-cd /home/igi/Desktop/ab-d/dev/Bank_Loan_Risk_Prediction/
+# Clone the repository
+git clone https://github.com/Overloadpy/Bank_Loan_Risk_Prediction.git
+cd Bank_Loan_Risk_Prediction
 
 # Install dependencies
 pip install -r requirements.txt
