@@ -59,10 +59,18 @@ sns.set_theme(style="whitegrid", palette="muted")
 plt.rcParams['figure.figsize'] = (10, 6)
 plt.rcParams['font.size'] = 11
 
-# Load dataset
-data_path = os.path.join("..", "data", "dataset.csv")
-if not os.path.exists(data_path):
-    data_path = os.path.join("data", "dataset.csv")
+# Resolve project root dynamically across all environments (Linux, Windows, macOS, JupyterLab, VSCode)
+project_root = os.path.abspath(os.getcwd())
+while project_root and not os.path.exists(os.path.join(project_root, "data", "dataset.csv")):
+    parent = os.path.dirname(project_root)
+    if parent == project_root:
+        break
+    project_root = parent
+
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+
+data_path = os.path.join(project_root, "data", "dataset.csv")
 
 df = pd.read_csv(data_path)
 print(f"Dataset Loaded Successfully! Shape: {df.shape}")
@@ -202,16 +210,22 @@ import numpy as np
 import joblib
 from sklearn.model_selection import train_test_split
 
-# Add src to sys.path
-sys.path.append(os.path.abspath(".."))
-sys.path.append(os.path.abspath("."))
+# Resolve project root dynamically across all environments (Linux, Windows, macOS, JupyterLab, VSCode)
+project_root = os.path.abspath(os.getcwd())
+while project_root and not os.path.exists(os.path.join(project_root, "data", "dataset.csv")):
+    parent = os.path.dirname(project_root)
+    if parent == project_root:
+        break
+    project_root = parent
+
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
 
 from src.preprocessor import CreditDataPreprocessor
 
-# Load raw dataset
-data_path = os.path.join("..", "data", "dataset.csv")
-if not os.path.exists(data_path):
-    data_path = os.path.join("data", "dataset.csv")
+data_path = os.path.join(project_root, "data", "dataset.csv")
+models_dir = os.path.join(project_root, "models")
+os.makedirs(models_dir, exist_ok=True)
 
 df = pd.read_csv(data_path)
 print(f"Raw Data Loaded: {df.shape}")
@@ -254,12 +268,7 @@ df_transformed_sample"""),
 
     nbf.v4.new_markdown_cell("""## 5. Serializing Preprocessor Artifact"""),
 
-    nbf.v4.new_code_cell("""models_dir = os.path.join("..", "models")
-if not os.path.exists(models_dir):
-    models_dir = "models"
-os.makedirs(models_dir, exist_ok=True)
-
-preprocessor_path = os.path.join(models_dir, "preprocessor.pkl")
+    nbf.v4.new_code_cell("""preprocessor_path = os.path.join(models_dir, "preprocessor.pkl")
 preprocessor.save(preprocessor_path)
 print(f"Successfully saved fitted preprocessor to '{preprocessor_path}'!")
 
@@ -300,15 +309,22 @@ from sklearn.metrics import (
 )
 from sklearn.model_selection import train_test_split
 
-sys.path.append(os.path.abspath(".."))
-sys.path.append(os.path.abspath("."))
+# Resolve project root dynamically across all environments (Linux, Windows, macOS, JupyterLab, VSCode)
+project_root = os.path.abspath(os.getcwd())
+while project_root and not os.path.exists(os.path.join(project_root, "data", "dataset.csv")):
+    parent = os.path.dirname(project_root)
+    if parent == project_root:
+        break
+    project_root = parent
+
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
 
 from src.preprocessor import CreditDataPreprocessor
 
-# Load dataset
-data_path = os.path.join("..", "data", "dataset.csv")
-if not os.path.exists(data_path):
-    data_path = os.path.join("data", "dataset.csv")
+data_path = os.path.join(project_root, "data", "dataset.csv")
+models_dir = os.path.join(project_root, "models")
+os.makedirs(models_dir, exist_ok=True)
 
 df = pd.read_csv(data_path)
 X = df.drop(columns=['Risk'])
@@ -320,10 +336,6 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 # Load preprocessor
-models_dir = os.path.join("..", "models")
-if not os.path.exists(models_dir):
-    models_dir = "models"
-
 preprocessor = CreditDataPreprocessor.load(os.path.join(models_dir, "preprocessor.pkl"))
 X_train_trans = preprocessor.transform(X_train)
 X_test_trans = preprocessor.transform(X_test)
@@ -449,15 +461,22 @@ from sklearn.metrics import (
 )
 from sklearn.model_selection import train_test_split
 
-sys.path.append(os.path.abspath(".."))
-sys.path.append(os.path.abspath("."))
+# Resolve project root dynamically across all environments (Linux, Windows, macOS, JupyterLab, VSCode)
+project_root = os.path.abspath(os.getcwd())
+while project_root and not os.path.exists(os.path.join(project_root, "data", "dataset.csv")):
+    parent = os.path.dirname(project_root)
+    if parent == project_root:
+        break
+    project_root = parent
+
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
 
 from src.preprocessor import CreditDataPreprocessor
 
-# Load dataset
-data_path = os.path.join("..", "data", "dataset.csv")
-if not os.path.exists(data_path):
-    data_path = os.path.join("data", "dataset.csv")
+data_path = os.path.join(project_root, "data", "dataset.csv")
+models_dir = os.path.join(project_root, "models")
+os.makedirs(models_dir, exist_ok=True)
 
 df = pd.read_csv(data_path)
 X = df.drop(columns=['Risk'])
@@ -469,10 +488,6 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 # Load preprocessor
-models_dir = os.path.join("..", "models")
-if not os.path.exists(models_dir):
-    models_dir = "models"
-
 preprocessor = CreditDataPreprocessor.load(os.path.join(models_dir, "preprocessor.pkl"))
 X_train_trans = preprocessor.transform(X_train)
 X_test_trans = preprocessor.transform(X_test)
@@ -599,15 +614,21 @@ from sklearn.metrics import (
 )
 from sklearn.model_selection import train_test_split
 
-sys.path.append(os.path.abspath(".."))
-sys.path.append(os.path.abspath("."))
+# Resolve project root dynamically across all environments (Linux, Windows, macOS, JupyterLab, VSCode)
+project_root = os.path.abspath(os.getcwd())
+while project_root and not os.path.exists(os.path.join(project_root, "data", "dataset.csv")):
+    parent = os.path.dirname(project_root)
+    if parent == project_root:
+        break
+    project_root = parent
+
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
 
 from src.preprocessor import CreditDataPreprocessor
 
-# Load dataset and prepare test split
-data_path = os.path.join("..", "data", "dataset.csv")
-if not os.path.exists(data_path):
-    data_path = os.path.join("data", "dataset.csv")
+data_path = os.path.join(project_root, "data", "dataset.csv")
+models_dir = os.path.join(project_root, "models")
 
 df = pd.read_csv(data_path)
 X = df.drop(columns=['Risk'])
@@ -618,10 +639,6 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 # Load artifacts
-models_dir = os.path.join("..", "models")
-if not os.path.exists(models_dir):
-    models_dir = "models"
-
 preprocessor = CreditDataPreprocessor.load(os.path.join(models_dir, "preprocessor.pkl"))
 lr_model = joblib.load(os.path.join(models_dir, "logistic_regression.pkl"))
 rf_model = joblib.load(os.path.join(models_dir, "random_forest.pkl"))
