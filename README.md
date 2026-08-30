@@ -10,11 +10,65 @@ An end-to-end Machine Learning credit scoring pipeline and risk evaluation suite
 
 ---
 
-## 👤 Author Information
+## 👤 Author & License Attribution
 
-- **Author**: **Yordanos Andargachew**
-- **Phone**: `+251 952 190 305`
-- **GitHub Repository**: [Overloadpy/Bank_Loan_Risk_Prediction](https://github.com/Overloadpy/Bank_Loan_Risk_Prediction)
+- **Lead Engineer & Author**: **Yordanos Andargachew**
+- **Contact / Phone**: `+251 952 190 305`
+- **GitHub Repository**: [bank-loan-risk-prediction](https://github.com/your-username/bank-loan-risk-prediction)
+- **License**: Open Academic / [MIT License](LICENSE)
+
+---
+
+## 🖥️ Visual Preview & Interfaces
+
+### Modern Desktop Studio GUI
+A reactive PySide6 (Qt6) interface with dark/light mode toggle, dynamic probability progress bars, instant underwriting verdict cards, and pre-configured borrower profile presets.
+
+![Desktop GUI Preview](docs/assets/gui_preview.png)
+
+---
+
+### Command Line Interface (CLI) Live Snapshot
+Single-shot loan underwriting evaluation directly from the terminal with Rich table formatting:
+
+```bash
+python cli.py predict --age 35 --amount 5000 --duration 24 --housing own --saving little --checking moderate --purpose car
+```
+
+```text
+╭───────────────────────────────────────────────────────╮
+│ 🏦 BANK LOAN RISK PREDICTION SYSTEM                   │
+│ Production Credit Underwriting & Decision Support CLI │
+│ Author: Yordanos Andargachew (+251 952 190 305)       │
+╰───────────────────────────────────────────────────────╯
+     📋 Applicant Profile      
+┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┓
+┃ Feature          ┃    Value ┃
+┡━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━┩
+│ Age              │       35 │
+│ Sex              │     male │
+│ Job              │        2 │
+│ Housing          │      own │
+│ Saving accounts  │   little │
+│ Checking account │ moderate │
+│ Credit amount    │     5000 │
+│ Duration         │       24 │
+│ Purpose          │      car │
+└──────────────────┴──────────┘
+                           🎯 Risk Assessment Verdict                           
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Assessment Metric           ┃ Outcome                                        ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ Decision Classification     │ 🔴 CAUTION: BAD RISK (HIGH DEFAULT PROPENSITY) │
+│ Risk Tier                   │ HIGH RISK                                      │
+│ Model Confidence            │ 57.17%                                         │
+│ Good Repayment Probability  │ 42.83%                                         │
+│ Default Probability         │ 57.17%                                         │
+│ Underwriting Recommendation │ CAUTION / MANUAL REVIEW: Elevated probability  │
+│                             │ of default. Consider collateral.               │
+│ Scoring Engine Used         │ Random Forest (Advanced Ensemble)              │
+└─────────────────────────────┴────────────────────────────────────────────────┘
+```
 
 ---
 
@@ -56,6 +110,8 @@ Bank_Loan_Risk_Prediction/
 │   ├── 04_advanced_model.ipynb    # Random Forest training & feature importances
 │   └── 05_comparison.ipynb        # Side-by-side metric tables, confusion matrices & ROC curves
 └── docs/
+    ├── assets/
+    │   └── gui_preview.png        # High-resolution Desktop GUI Studio capture
     ├── PROBLEM_DEFINITION.md      # Objectives, stakeholders, input/output & RQs
     ├── DATASET_DOCUMENTATION.md   # ML Data Card (Source, Features, License, Bias)
     ├── RESULTS_AND_ANALYSIS.md    # Model comparison, confusion matrices & metrics
@@ -91,93 +147,42 @@ flowchart TD
 
 ---
 
-## 🚀 Quickstart Guide
+## 🚀 Installation & Quickstart Guide
 
-### 1. Installation & Environment Setup
+Follow these steps to set up and run the system locally:
 
 ```bash
-# Clone the repository
-git clone https://github.com/Overloadpy/Bank_Loan_Risk_Prediction.git
-cd Bank_Loan_Risk_Prediction
+# 1. Clone the repository
+git clone https://github.com/your-username/bank-loan-risk-prediction.git
+cd bank-loan-risk-prediction
 
-# Install dependencies
+# 2. Create and activate a virtual environment
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# 3. Install dependencies
 pip install -r requirements.txt
-```
 
----
+# 4. Launch Desktop GUI Studio
+python gui.py
 
-### 2. Command Line Interface (CLI) Usage
-
-#### Single Applicant Risk Prediction
-Assess default probability and receive an automated underwriting recommendation:
-
-```bash
+# 5. Or use the Command-Line Interface (CLI)
 python cli.py predict --age 35 --amount 5000 --duration 24 --housing own --saving little --checking moderate --purpose car
 ```
 
-*Example Output:*
-```text
-     📋 Applicant Profile      
-┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┓
-┃ Feature          ┃    Value ┃
-┡━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━┩
-│ Age              │       35 │
-│ Sex              │     male │
-│ Job              │        2 │
-│ Housing          │      own │
-│ Saving accounts  │   little │
-│ Checking account │ moderate │
-│ Credit amount    │     5000 │
-│ Duration         │       24 │
-│ Purpose          │      car │
-└──────────────────┴──────────┘
-                           🎯 Risk Assessment Verdict                           
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃ Assessment Metric           ┃ Outcome                                        ┃
-┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
-│ Decision Classification     │ 🔴 CAUTION: BAD RISK (HIGH DEFAULT PROPENSITY) │
-│ Risk Tier                   │ HIGH RISK                                      │
-│ Model Confidence            │ 57.17%                                         │
-│ Good Repayment Probability  │ 42.83%                                         │
-│ Default Probability         │ 57.17%                                         │
-│ Underwriting Recommendation │ CAUTION / MANUAL REVIEW: Elevated probability  │
-│                             │ of default. Consider collateral.               │
-│ Scoring Engine Used         │ Random Forest (Advanced Ensemble)              │
-└─────────────────────────────┴────────────────────────────────────────────────┘
+---
+
+## 💻 Extended CLI Usage
+
+### Single Applicant Prediction
+```bash
+python cli.py predict --age 48 --amount 1500 --duration 12 --housing own --saving rich --checking rich --purpose radio/TV
 ```
 
-#### Side-by-Side Model Performance Evaluation
-Evaluate both models on the 20% holdout test dataset:
-
+### Model Performance Benchmark on Test Dataset
 ```bash
 python cli.py evaluate
 ```
-
----
-
-### 3. Modern Desktop Studio GUI Launch
-
-Launch the modern PySide6 desktop GUI with dark/light themes, preset borrowers, dynamic probability bars, and instant underwriting verdict cards:
-
-```bash
-python gui.py
-```
-
----
-
-### 4. Interactive Jupyter Research Notebooks
-
-Launch JupyterLab to inspect or re-execute the 5 research notebooks:
-
-```bash
-jupyter lab notebooks/
-```
-
-- `01_eda.ipynb`: Missing value analysis, class imbalance, and feature correlation heatmaps.
-- `02_preprocessing.ipynb`: Pipeline design, transformer fitting, and serialization.
-- `03_baseline_model.ipynb`: Logistic Regression training, metrics, and coefficients.
-- `04_advanced_model.ipynb`: Random Forest training, metrics, and Gini feature importances.
-- `05_comparison.ipynb`: Comparative evaluation tables, confusion matrices, and ROC-AUC curves.
 
 ---
 
@@ -197,7 +202,7 @@ Evaluated on 20% stratified holdout test split ($N=200$):
 
 ## 🧪 Testing & Verification
 
-Run automated test suite:
+Run the automated test suite with pytest:
 
 ```bash
 pytest tests/ -v
@@ -205,16 +210,21 @@ pytest tests/ -v
 
 ---
 
-## 📚 Technical Documentation
+## 📚 Documentation Hub
 
-For in-depth mathematical formulations, data audits, and research logs, see the `docs/` folder:
-- [Problem Definition & Objectives](docs/PROBLEM_DEFINITION.md)
-- [Dataset Documentation & Data Card](docs/DATASET_DOCUMENTATION.md)
-- [Results & Performance Analysis](docs/RESULTS_AND_ANALYSIS.md)
-- [End-to-End Methodology](docs/METHODOLOGY.md)
-- [Research & Experimentation Log](docs/RESEARCH_LOG.md)
+Explore the in-depth research, architectural decisions, and data audits:
+
+| Document | File Path | Description |
+|---|---|---|
+| **Problem Definition** | [docs/PROBLEM_DEFINITION.md](docs/PROBLEM_DEFINITION.md) | Business context, underwriting objectives, and research questions. |
+| **Dataset Documentation** | [docs/DATASET_DOCUMENTATION.md](docs/DATASET_DOCUMENTATION.md) | ML Data Card, feature dictionary, missing values, and bias analysis. |
+| **Methodology** | [docs/METHODOLOGY.md](docs/METHODOLOGY.md) | End-to-end data pipeline, feature scaling, and encoding methodology. |
+| **Results & Analysis** | [docs/RESULTS_AND_ANALYSIS.md](docs/RESULTS_AND_ANALYSIS.md) | Baseline vs. Random Forest performance, ROC-AUC curves, and confusion matrices. |
+| **Research Log** | [docs/RESEARCH_LOG.md](docs/RESEARCH_LOG.md) | Iterative experiment log and parameter tuning history. |
 
 ---
 
-## 📄 License
-MIT License. Created by **Yordanos Andargachew** (2026).
+## 📄 License & Attribution
+
+- **Lead Engineer**: **Yordanos Andargachew** (Phone: `+251 952 190 305`)
+- **License**: Released under the [MIT License](LICENSE). Suitable for open-source, academic research, and commercial credit modeling reference.
