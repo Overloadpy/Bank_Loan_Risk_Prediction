@@ -83,7 +83,7 @@ missing_summary"""),
 
     nbf.v4.new_code_cell("""# Visualize Missing Values
 plt.figure(figsize=(8, 4))
-sns.barplot(x=missing_summary.index, y=missing_summary['Missing Percentage (%)'], palette="viridis")
+sns.barplot(x=missing_summary.index, y=missing_summary['Missing Percentage (%)'], hue=missing_summary.index, palette="viridis", legend=False)
 plt.title("Missing Value Percentage per Feature", fontsize=14, fontweight='bold', pad=15)
 plt.ylabel("Missing Percentage (%)")
 plt.xlabel("Feature Column")
@@ -106,7 +106,7 @@ print(f"\\nDefault Rate (Bad Risk): {(risk_counts['bad'] / len(df)) * 100:.1f}%"
 fig, axes = plt.subplots(1, 2, figsize=(12, 5))
 
 # Countplot
-sns.countplot(ax=axes[0], data=df, x='Risk', palette=['#10b981', '#ef4444'])
+sns.countplot(ax=axes[0], data=df, x='Risk', hue='Risk', palette=['#10b981', '#ef4444'], legend=False)
 axes[0].set_title("Distribution of Loan Risk Classes", fontsize=13, fontweight='bold')
 axes[0].set_ylabel("Count")
 for p in axes[0].patches:
@@ -130,7 +130,7 @@ Analyzing `Age`, `Credit amount`, and `Duration` partitioned by Risk classificat
 
 fig, axes = plt.subplots(1, 3, figsize=(16, 5))
 for i, col in enumerate(num_cols):
-    sns.boxplot(ax=axes[i], data=df, x='Risk', y=col, palette=['#10b981', '#ef4444'])
+    sns.boxplot(ax=axes[i], data=df, x='Risk', y=col, hue='Risk', palette=['#10b981', '#ef4444'], legend=False)
     axes[i].set_title(f"{col} by Risk Status", fontsize=12, fontweight='bold')
 plt.tight_layout()
 plt.show()
@@ -405,7 +405,7 @@ plt.show()"""),
 
 plt.figure(figsize=(10, 8))
 colors = ['#ef4444' if c > 0 else '#10b981' for c in coef_df['Coefficient']]
-sns.barplot(data=coef_df, x='Coefficient', y='Feature', palette=colors)
+sns.barplot(data=coef_df, x='Coefficient', y='Feature', hue='Feature', palette=colors, legend=False)
 plt.title("Logistic Regression Feature Coefficients (Log-Odds Impact on Default)", fontsize=13, fontweight='bold', pad=15)
 plt.xlabel("Coefficient Value (>0 increases Default Risk, <0 increases Repayment Probability)")
 plt.axvline(0, color='black', linestyle='--', linewidth=0.8)
@@ -559,7 +559,7 @@ print("Top 10 Most Important Features:")
 print(feat_imp_df.head(10).to_string(index=False))
 
 plt.figure(figsize=(10, 6))
-sns.barplot(data=feat_imp_df.head(10), x='Importance', y='Feature', palette='viridis')
+sns.barplot(data=feat_imp_df.head(10), x='Importance', y='Feature', hue='Feature', palette='viridis', legend=False)
 plt.title("Top 10 Feature Importances in Loan Risk Prediction (Random Forest)", fontsize=13, fontweight='bold', pad=15)
 plt.xlabel("Mean Decrease in Impurity (Gini Importance)")
 plt.ylabel("Feature")
